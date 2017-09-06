@@ -1,7 +1,17 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <string.h>
+
+int strlen(char * string)
+{
+    int count = 0;
+    while(string[count] != '\0')
+    {
+        count++;
+    }
+    return count;
+}
+
 
 // Shamelessly stolen
 char * itoa(int value, char * result, int base)
