@@ -74,9 +74,10 @@ int count_variables(char * string)
 
 void print_string(char * string)
 {
-    for(int j = 0; j < strlen(string); j++)
+    while(*string != '\0')
     {
-        putc(string[j], stdout);
+        putc(*string, stdout);
+        string++;
     }
 }
 
@@ -84,6 +85,22 @@ void print_decimal(int decimal)
 {
     char string[sizeof(int) + 1] = {0};
     itoa(decimal, string, 10);
+    print_string(string);
+}
+
+void print_address(int address)
+{
+    char number[sizeof(int) + 1] = {0};
+    itoa(address, number, 16);
+
+    // TODO: This is dumb. We should be better than this.
+    char string[(sizeof(int) + 1) + 2] = {0};
+    string[0] = '0';
+    string[1] = 'x';
+    for(int i = 0; i < strlen(number); i++)
+    {
+        string[i + 2] = number[i];
+    }
     print_string(string);
 }
 
@@ -105,6 +122,16 @@ void kprintf(char * string, ...)
                     break;
                 case 'd':
                     print_decimal(va_arg(valist, int));
+                    i++;
+                    break;
+                case 'x':
+                    print_address(va_arg(valist, int));
+                    i++;
+                    break;
+                case 'c':
+                    // NOTE: GCC was bitching about this being a 'char' type, so just
+                    // make it an int to shut GCC up.
+                    putc(va_arg(valist, int), stdout);
                     i++;
                     break;
                 default:

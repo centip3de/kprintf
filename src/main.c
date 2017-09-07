@@ -2,7 +2,8 @@
 
 void simple_example()
 {
-    kprintf("Hello, %s!\nForest eats %d hamburgers a day.\n", "Test", 9);
+    char * foo = "Test pointer for address";
+    kprintf("String, %s!\nDecimal %d\nAddress %x\nChar %c\n", "Test", 9, &foo, 'a');
 }
 
 int main(int argc, char** argv)
