@@ -51,9 +51,10 @@ char * itoa(int value, char * result, int base)
 int count_variables(char * string)
 {
     int count = 0;
-    for(int i = 0; i < strlen(string); i++)
+    int length = strlen(string);
+    for(int i = 0; i < length; i++)
     {
-        if(string[i] == '%' && i != strlen(string))
+        if(string[i] == '%' && i != length)
         {
             char next = string[i + 1];
             switch(next)
@@ -107,11 +108,14 @@ void print_address(int address)
 void kprintf(char * string, ...)
 {
     va_list valist;
-    int count = count_variables(string);
     va_start(valist, string);
-    for(int i = 0; i < strlen(string); i++)
+
+    int count = count_variables(string);
+    int length = strlen(string);
+
+    for(int i = 0; i < length; i++)
     {
-        if(string[i] == '%' && i != strlen(string))
+        if(string[i] == '%' && i != length)
         {
             char next = string[i + 1];
             switch(next)
