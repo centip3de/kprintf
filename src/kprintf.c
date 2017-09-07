@@ -61,7 +61,7 @@ int count_variables(char * string)
             {
                 case 's':
                 case 'd':
-                case 'f':
+                case 'c':
                 case 'x':
                     count++;
                     break;
